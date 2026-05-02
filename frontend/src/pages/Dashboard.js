@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
-const socket = io("http://13.235.70.78:5000/");
+const socket = io("http://13.235.70.78/");
 
 function Dashboard() {
   const [skillsOffered, setSkillsOffered] = useState("");
@@ -35,13 +35,10 @@ function Dashboard() {
   // 🔹 Update Skills
   const handleUpdateSkills = async () => {
     try {
-      await axios.put(
-        `http://13.235.70.78:5000/api/users/update-skills/${userId}`,
-        {
-          skillsOffered: skillsOffered.split(","),
-          skillsWanted: skillsWanted.split(","),
-        },
-      );
+      await axios.put(`http://13.235.70.78/api/users/update-skills/${userId}`, {
+        skillsOffered: skillsOffered.split(","),
+        skillsWanted: skillsWanted.split(","),
+      });
       setSuccessMsg("Skills updated successfully!");
       setErrorMsg("");
       fetchMatches();
@@ -55,7 +52,7 @@ function Dashboard() {
   const fetchMatches = useCallback(async () => {
     try {
       const res = await axios.get(
-        `http://13.235.70.78:5000/api/users/match/${userId}`,
+        `http://13.235.70.78/api/users/match/${userId}`,
       );
       setMatches(res.data);
     } catch {
@@ -67,7 +64,7 @@ function Dashboard() {
   const fetchRequests = useCallback(async () => {
     try {
       const res = await axios.get(
-        `http://13.235.70.78:5000/api/requests/received/${userId}`,
+        `http://13.235.70.78/api/requests/received/${userId}`,
       );
       setRequests(res.data);
     } catch {
@@ -79,7 +76,7 @@ function Dashboard() {
   const fetchUnread = useCallback(async () => {
     try {
       const res = await axios.get(
-        `http://13.235.70.78:5000/api/messages/unread/${userId}`,
+        `http://13.235.70.78/api/messages/unread/${userId}`,
       );
       setUnreadCount(res.data.count);
     } catch {
@@ -90,7 +87,7 @@ function Dashboard() {
   // 🔹 Send Request
   const sendRequest = async (receiverId, skill) => {
     try {
-      await axios.post("http://13.235.70.78:5000/api/requests/send", {
+      await axios.post("http://13.235.70.78/api/requests/send", {
         sender: userId,
         receiver: receiverId,
         skill,
@@ -104,10 +101,9 @@ function Dashboard() {
   // 🔹 Update Request
   const updateRequest = async (requestId, status) => {
     try {
-      await axios.put(
-        `http://13.235.70.78:5000/api/requests/update/${requestId}`,
-        { status },
-      );
+      await axios.put(`http://13.235.70.78/api/requests/update/${requestId}`, {
+        status,
+      });
       fetchRequests();
     } catch {
       alert("Error updating request");
