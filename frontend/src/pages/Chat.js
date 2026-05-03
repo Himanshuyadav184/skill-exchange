@@ -2,7 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
-const socket = io("http://13.235.70.78/");
+const socket = io("https://skillchat.duckdns.org", {
+  transports: ["websocket", "polling"],
+});
+
 
 function Chat() {
   const [users, setUsers] = useState([]);
@@ -48,7 +51,7 @@ function Chat() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://13.235.70.78/api/users");
+        const res = await axios.get("${API}/api/users");
         setUsers(res.data.filter((u) => u._id !== userId));
       } catch (error) {
         console.log(error);
@@ -72,14 +75,14 @@ function Chat() {
 
       try {
         const res = await axios.get(
-          `http://13.235.70.78/api/messages/${userId}/${receiver._id}`,
+          `${API}/api/messages/${userId}/${receiver._id}`,
         );
 
         setMessages(res.data);
 
         // mark messages as seen
         await axios.put(
-          `http://13.235.70.78/api/messages/seen/${receiver._id}/${userId}`,
+          `${API}/api/messages/seen/${receiver._id}/${userId}`,
         );
       } catch {
         alert("Error fetching messages");
@@ -101,7 +104,8 @@ function Chat() {
       });
 
       // still save in DB
-      await axios.post("http://13.235.70.78/api/messages/send", {
+      await axios.post("${API}/api/messages/send", {
+
         sender: userId,
         receiver: receiver._id,
         text,
@@ -110,7 +114,7 @@ function Chat() {
       setText("");
 
       const res = await axios.get(
-        `http://13.235.70.78/api/messages/${userId}/${receiver._id}`,
+        `${API}/api/messages/${userId}/${receiver._id}`,
       );
 
       setMessages(res.data);
