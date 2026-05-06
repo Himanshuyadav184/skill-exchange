@@ -25,7 +25,8 @@ app.use(
     origin: [
       "http://localhost:3000",
       "https://skill-exchange-n717.vercel.app",
-      "https://skill-exchange-n717-lavanyaranas-projects.vercel.app"
+      "https://skill-exchange-n717-lavanyaranas-projects.vercel.app",
+      "https://skill-exchange-n717-rmeoqt7rf-lavanyaranas-projects.vercel.app"
     ],
     credentials: true,
   })
@@ -46,15 +47,19 @@ app.get("/", (req, res) => {
 const server = http.createServer(app);
 
 // ✅ Socket AFTER server
+
+// BLOCK 2 - Socket.IO (real-time chat) - this is SEPARATE
 const io = new Server(server, {
   cors: {
     origin: [
       "https://skill-exchange-n717.vercel.app",
-      "https://skill-exchange-n717-lavanyaranas-projects.vercel.app"
+      "https://skill-exchange-n717-lavanyaranas-projects.vercel.app",
+      "https://skill-exchange-n717-rmeoqt7rf-lavanyaranas-projects.vercel.app"  // ← add this here too
     ],
     methods: ["GET", "POST"],
   },
 });
+
 
 // Socket logic
 io.on("connection", (socket) => {
