@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 
@@ -7,6 +7,55 @@ const socket = io(API);
 const CATS = ["All","Programming","Design","Music","Language","AI / ML","Data Science","Finance","Marketing","Other"];
 const PAL = ["#2563eb","#7c3aed","#059669","#dc2626","#d97706","#0891b2","#be185d","#65a30d"];
 const gc = (n) => PAL[n.charCodeAt(0) % PAL.length];
+
+
+function AiChat() {
+  const [open, setOpen] = React.useState(false);
+  const [messages, setMessages] = React.useState([{role:"bot",text:"Hi! I am your SkillXchange AI assistant. Ask me anything about finding skill partners or learning tips!"}]);
+  const [input, setInput] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const bottomRef = React.useRef(null);
+  React.useEffect(()=>{ bottomRef.current?.scrollIntoView({behavior:"smooth"}); },[messages]);
+  const send = async () => {
+    if(!input.trim()||loading) return;
+    const userMsg = input.trim();
+    setInput("");
+    setMessages(p=>[...p,{role:"user",text:userMsg}]);
+    setLoading(true);
+    try {
+      const history = messages.slice(-6).map(m=>({role:m.role==="user"?"user":"assistant",content:m.text}));
+      const res = await axios.post(`${API}/api/ai/chat`,{message:userMsg,history});
+      setMessages(p=>[...p,{role:"bot",text:res.data.reply}]);
+    } catch {
+      setMessages(p=>[...p,{role:"bot",text:"Sorry, AI is unavailable right now."}]);
+    }
+    setLoading(false);
+  };
+  return (
+    <>
+      {open && (
+        <div style={{position:"fixed",bottom:96,right:28,zIndex:1000,width:340,background:"#fff",border:"1.5px solid #e2e8f0",borderRadius:20,boxShadow:"0 8px 40px rgba(0,0,0,0.15)",display:"flex",flexDirection:"column",maxHeight:460}}>
+          <div style={{padding:"14px 18px",borderBottom:"1px solid #f1f5f9",display:"flex",alignItems:"center",gap:10,background:"linear-gradient(135deg,#6C63FF,#A78BFA)",borderRadius:"18px 18px 0 0"}}>
+            <span style={{fontSize:20}}>🤖</span>
+            <div><div style={{fontWeight:700,color:"#fff",fontSize:14}}>SkillXchange AI</div><div style={{fontSize:11,color:"rgba(255,255,255,0.8)"}}>Powered by Llama 3</div></div>
+          </div>
+          <div style={{flex:1,overflowY:"auto",padding:14,display:"flex",flexDirection:"column",gap:10,minHeight:200}}>
+            {messages.map((m,i)=>(
+              <div key={i} style={{alignSelf:m.role==="user"?"flex-end":"flex-start",background:m.role==="user"?"linear-gradient(135deg,#6C63FF,#A78BFA)":"#f1f5f9",color:m.role==="user"?"#fff":"#1e293b",padding:"9px 13px",borderRadius:m.role==="user"?"14px 14px 4px 14px":"4px 14px 14px 14px",fontSize:13,maxWidth:"85%",lineHeight:1.5}}>{m.text}</div>
+            ))}
+            {loading && <div style={{alignSelf:"flex-start",background:"#f1f5f9",padding:"9px 13px",borderRadius:"4px 14px 14px 14px",fontSize:13,color:"#94a3b8"}}>thinking...</div>}
+            <div ref={bottomRef}/>
+          </div>
+          <div style={{padding:"10px 12px",borderTop:"1px solid #f1f5f9",display:"flex",gap:8}}>
+            <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&send()} placeholder="Ask about skills..." style={{flex:1,padding:"9px 13px",borderRadius:10,border:"1.5px solid #e2e8f0",fontSize:13,outline:"none"}}/>
+            <button onClick={send} disabled={loading} style={{padding:"9px 16px",borderRadius:10,background:"linear-gradient(135deg,#6C63FF,#A78BFA)",border:"none",color:"#fff",fontWeight:600,fontSize:13,cursor:"pointer"}}>Send</button>
+          </div>
+        </div>
+      )}
+      <button onClick={()=>setOpen(o=>!o)} style={{position:"fixed",bottom:28,right:28,zIndex:1000,width:56,height:56,borderRadius:99,background:"linear-gradient(135deg,#6C63FF,#A78BFA)",border:"none",cursor:"pointer",fontSize:24,boxShadow:"0 4px 20px rgba(108,99,255,0.4)",display:"flex",alignItems:"center",justifyContent:"center"}}>{open?"✕":"🤖"}</button>
+    </>
+  );
+}
 
 function Dashboard() {
   const [skillsOffered, setSkillsOffered] = useState("");
@@ -489,6 +538,7 @@ function Dashboard() {
           {["Learn","Teach","Connect"].map(t => <span key={t} style={{fontSize:13,color:"#475569",cursor:"pointer"}}>{t}</span>)}
         </div>
       </div>
+      <AiChat/>
     </div>
   );
 }
