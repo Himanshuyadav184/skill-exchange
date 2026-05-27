@@ -41,7 +41,7 @@ function Profile() {
   );
 
   const avatarColors = ["#1a73e8", "#7c3aed", "#059669", "#dc2626", "#d97706", "#0891b2"];
-  const avatarColor = avatarColors[user.name.charCodeAt(0) % avatarColors.length];
+  // const avatarColor = avatarColors[user.name.charCodeAt(0) % avatarColors.length];
 
   return (
     <div style={{ minHeight: "100vh", background: "#f4f6f9", fontFamily: "'Segoe UI', Arial, sans-serif" }}>
