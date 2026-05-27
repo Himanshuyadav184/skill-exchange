@@ -9,74 +9,65 @@ function Register() {
 
   const handleRegister = async () => {
     try {
-      const res = await axios.post(`https://skillchat.duckdns.org/api/auth/register`, {
-        name,
-        email,
-        password,
-      });
+      const res = await axios.post(`https://skillchat.duckdns.org/api/auth/register`, { name, email, password });
       alert(res.data.msg);
     } catch (error) {
       alert(error.response?.data?.msg || "Error occurred");
     }
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") handleRegister();
-  };
+  const handleKeyDown = (e) => { if (e.key === "Enter") handleRegister(); };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-green-400 to-blue-500">
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-96">
-
-        {/* App Name */}
-        <div className="text-center mb-6">
-          <h1 className="text-4xl font-extrabold bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent">
-            🔄 SkillXchange
-          </h1>
-          <p className="text-gray-400 text-sm mt-1">Learn · Teach · Grow</p>
+    <div style={{ minHeight: "100vh", background: "#f4f6f9", display: "flex", fontFamily: "'Segoe UI', Arial, sans-serif" }}>
+      {/* LEFT PANEL */}
+      <div style={{ flex: 1, background: "linear-gradient(135deg, #0d47a1 0%, #1a73e8 100%)", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", padding: 48, color: "#fff" }}>
+        <div style={{ maxWidth: 400 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 40 }}>
+            <div style={{ width: 42, height: 42, borderRadius: 10, background: "rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 22 }}>S</div>
+            <span style={{ fontWeight: 800, fontSize: 24 }}>Skill<span style={{ color: "#93c5fd" }}>Xchange</span></span>
+          </div>
+          <h2 style={{ fontSize: 32, fontWeight: 800, margin: "0 0 16px", lineHeight: 1.2 }}>Join thousands of<br />skill sharers.</h2>
+          <p style={{ fontSize: 16, color: "rgba(255,255,255,0.75)", lineHeight: 1.7, margin: "0 0 40px" }}>Create a free account and start connecting with people who want to exchange knowledge.</p>
+          <div style={{ background: "rgba(255,255,255,0.1)", borderRadius: 12, padding: 20 }}>
+            <p style={{ fontSize: 14, color: "rgba(255,255,255,0.9)", margin: 0, lineHeight: 1.6 }}>
+              "SkillXchange helped me learn guitar in exchange for teaching Python. Best trade ever!" <br />
+              <strong style={{ color: "#93c5fd" }}>— Rahul, Delhi</strong>
+            </p>
+          </div>
         </div>
+      </div>
 
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
-          Create Account 🚀
-        </h2>
+      {/* RIGHT PANEL */}
+      <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: 48 }}>
+        <div style={{ width: "100%", maxWidth: 400 }}>
+          <h1 style={{ fontSize: 28, fontWeight: 800, color: "#1a1a2e", margin: "0 0 6px" }}>Create account</h1>
+          <p style={{ color: "#6b7280", fontSize: 15, margin: "0 0 32px" }}>Free forever — no credit card required</p>
 
-        <input
-          type="text"
-          placeholder="Enter your name"
-          className="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-          onChange={(e) => setName(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
+          {[
+            ["Full name", "text", "John Doe", setName],
+            ["Email address", "email", "you@example.com", setEmail],
+            ["Password", "password", "Min. 8 characters", setPassword],
+          ].map(([label, type, ph, setter]) => (
+            <div key={label} style={{ marginBottom: 20 }}>
+              <label style={{ fontSize: 12, fontWeight: 700, color: "#374151", display: "block", marginBottom: 6, letterSpacing: 0.5, textTransform: "uppercase" }}>{label}</label>
+              <input type={type} placeholder={ph}
+                style={{ width: "100%", padding: "13px 16px", borderRadius: 8, border: "1.5px solid #d0d7e2", fontSize: 15, boxSizing: "border-box", outline: "none", color: "#1a1a2e", background: "#fafbfc" }}
+                onChange={(e) => setter(e.target.value)} onKeyDown={handleKeyDown} />
+            </div>
+          ))}
 
-        <input
-          type="email"
-          placeholder="Enter your email"
-          className="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-          onChange={(e) => setEmail(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
+          <button onClick={handleRegister}
+            style={{ width: "100%", padding: "14px", borderRadius: 8, background: "linear-gradient(135deg, #1a73e8, #0d47a1)", color: "#fff", fontWeight: 700, fontSize: 16, border: "none", cursor: "pointer", marginTop: 4 }}>
+            Create free account →
+          </button>
 
-        <input
-          type="password"
-          placeholder="Enter your password"
-          className="w-full p-3 mb-6 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-          onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
-
-        <button
-          onClick={handleRegister}
-          className="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition duration-300"
-        >
-          Register
-        </button>
-
-        <p className="text-center mt-4 text-gray-600">
-          Already have an account?{" "}
-          <Link to="/" className="text-green-500 font-semibold hover:underline">
-            Login
-          </Link>
-        </p>
+          <div style={{ margin: "24px 0", borderTop: "1px solid #e8edf2" }}></div>
+          <p style={{ textAlign: "center", fontSize: 14, color: "#6b7280" }}>
+            Already have an account?{" "}
+            <Link to="/" style={{ color: "#1a73e8", fontWeight: 700, textDecoration: "none" }}>Sign in</Link>
+          </p>
+        </div>
       </div>
     </div>
   );
