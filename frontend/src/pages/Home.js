@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  body{background:#05080F}
-  .lp{min-height:100vh;background:#05080F;font-family:'DM Sans',sans-serif;color:#E2E4EF;overflow-x:hidden}
+  body{background:#fff}
+  .lp{min-height:100vh;background:#fff;font-family:'DM Sans',sans-serif;color:#1e293b;overflow-x:hidden}
   .nav{position:sticky;top:0;z-index:100;background:rgba(5,8,15,0.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);height:66px;padding:0 48px;display:flex;align-items:center;justify-content:space-between}
   .nav-logo{display:flex;align-items:center;gap:10px}
   .nav-logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#6C63FF,#A78BFA);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Syne',sans-serif;font-weight:800;font-size:17px}
@@ -138,7 +138,7 @@ function Home() {
           </div>
         </div>
         <div className="stats-strip">
-          {[["2,400+","Active Users"],["180+","Skills Listed"],["94%","Match Rate"]].map(([n,l])=>(
+          {[["Free","Always"],["2-Way","Matching"],["Live","Chat"]].map(([n,l])=>(
             <div key={l} className="stat-item"><div className="stat-num">{n}</div><div className="stat-lbl">{l}</div></div>
           ))}
         </div>
