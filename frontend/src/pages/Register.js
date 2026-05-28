@@ -29,7 +29,7 @@ function Register() {
           </div>
           <h2 style={{ fontSize: 32, fontWeight: 800, margin: "0 0 16px", lineHeight: 1.2 }}>Join thousands of<br />skill sharers.</h2>
           <p style={{ fontSize: 16, color: "rgba(255,255,255,0.75)", lineHeight: 1.7, margin: "0 0 40px" }}>Create a free account and start connecting with people who want to exchange knowledge.</p>
-          <div style={{ background: "rgba(255,255,255,0.1)", borderRadius: 12, padding: 20 }}>
+          <div style={{ display:"none" }}>
             <p style={{ fontSize: 14, color: "rgba(255,255,255,0.9)", margin: 0, lineHeight: 1.6 }}>
                <br />
               <strong style={{ color: "#93c5fd" }}></strong>
