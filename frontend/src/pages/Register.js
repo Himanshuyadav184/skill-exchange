@@ -31,8 +31,8 @@ function Register() {
           <p style={{ fontSize: 16, color: "rgba(255,255,255,0.75)", lineHeight: 1.7, margin: "0 0 40px" }}>Create a free account and start connecting with people who want to exchange knowledge.</p>
           <div style={{ background: "rgba(255,255,255,0.1)", borderRadius: 12, padding: 20 }}>
             <p style={{ fontSize: 14, color: "rgba(255,255,255,0.9)", margin: 0, lineHeight: 1.6 }}>
-              "SkillXchange helped me learn guitar in exchange for teaching Python. Best trade ever!" <br />
-              <strong style={{ color: "#93c5fd" }}>— Rahul, Delhi</strong>
+               <br />
+              <strong style={{ color: "#93c5fd" }}></strong>
             </p>
           </div>
         </div>
