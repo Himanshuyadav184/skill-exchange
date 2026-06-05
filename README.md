@@ -10,7 +10,7 @@ SkillXchange is a full-stack web application where students connect with each ot
 ## 🚀 Live Demo
 
 🌐 **Frontend:** [skill-exchange-n717.vercel.app](https://skill-exchange-n717.vercel.app)  
-🖥️ **Backend:** AWS EC2 — `13.235.70.78` (Asia Pacific, Mumbai)
+🖥️ **Backend:** AWS EC2 — `13.201.225.161` (Asia Pacific, Mumbai)
 
 ---
 
