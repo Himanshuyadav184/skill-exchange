@@ -12,6 +12,8 @@ SkillXchange is a full-stack web application where students connect with each ot
 🌐 **Frontend:** [skill-exchange-n717.vercel.app](https://skill-exchange-n717.vercel.app)  
 🖥️ **Backend:** AWS EC2 — `13.201.225.161` (Asia Pacific, Mumbai)
 
+⚠️ **Note:** The backend server is hosted on AWS EC2 and will be made live on request to avoid unnecessary cloud costs. Please contact the team to activate the server before testing.
+
 ---
 
 ## 👥 Team
@@ -178,4 +180,4 @@ Developed as part of an academic project at Dronacharya College of Engineering.
 
 ---
 
-<p align="center">Made with ❤️ by Himanshu Yadav & Lavanya Rana</p>
+<p align="center">Made with ❤️ by Lavanya Rana & Himanshu Yadav</p>
