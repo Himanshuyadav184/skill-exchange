@@ -10,9 +10,9 @@ SkillXchange is a full-stack web application where students connect with each ot
 ## 🚀 Live Demo
 
 🌐 **Frontend:** [skill-exchange-n717.vercel.app](https://skill-exchange-n717.vercel.app)  
-🖥️ **Backend:** AWS EC2 — `13.201.225.161` (Asia Pacific, Mumbai)
+🖥️ **Backend:** AWS EC2, reachable via [skillchat.duckdns.org](https://skillchat.duckdns.org)
 
-⚠️ **Note:** The backend server is hosted on AWS EC2 and will be made live on request to avoid unnecessary cloud costs. Please contact the team to activate the server before testing.
+⚠️ **Note:** The backend server is hosted on AWS EC2 and will be made live on request to avoid unnecessary cloud costs. Please contact the team to activate the server before testing. The EC2 instance does not currently use an Elastic IP, so its public IP can change on every stop/start — the DuckDNS record above is kept up to date, so always use `skillchat.duckdns.org` rather than a raw IP.
 
 ---
 
@@ -22,7 +22,6 @@ SkillXchange is a full-stack web application where students connect with each ot
 |------|---------|-------------|
 | **Himanshu Yadav** | 26073 | Full-Stack Development — Frontend (React.js), Backend (Node.js + Express), Skill Matching Algorithm, Real-Time Chat (Socket.IO), Database Design (MongoDB) |
 | **Lavanya Rana** | 26093 | Cloud Infrastructure & Deployment — AWS EC2, Nginx, PM2, MongoDB Atlas, Vercel, DuckDNS, Security Groups |
-
 
 ---
 
@@ -57,7 +56,6 @@ SkillXchange is a full-stack web application where students connect with each ot
 ---
 
 ## 🏗️ System Architecture
-
 ```
 React Frontend (Vercel)
         ↓
@@ -67,7 +65,6 @@ MongoDB Atlas (Cloud Database)
         ↓
 Socket.IO (Real-Time Communication)
 ```
-
 **Cloud Setup:**
 - Backend hosted on **AWS EC2** (t2.micro, ap-south-1b)
 - Nginx configured as **reverse proxy**
@@ -79,7 +76,6 @@ Socket.IO (Real-Time Communication)
 ---
 
 ## 📁 Project Structure
-
 ```
 skill-exchange/
 ├── frontend/
@@ -145,8 +141,9 @@ Create a `.env` file in the backend folder:
 MONGO_URI=your_mongodb_atlas_connection_string
 JWT_SECRET=your_secret_key
 PORT=5000
+EMAIL=ranalavanya33gmail.com
+EMAIL_PASS=bwtafaysdonsnjmn
 ```
-
 ---
 
 ## 📊 Results
@@ -159,7 +156,8 @@ PORT=5000
 | Profile Management | ✅ Working |
 | AWS EC2 Deployment | ✅ Running |
 | Vercel Frontend Deployment | ✅ Live |
-| MongoDB Atlas Cloud DB | ✅ Connected |
+| MongoDB (local on EC2) | ✅ Connected |
+| Forgot Password Emails | ⚠️ Requires a valid Gmail App Password in `EMAIL_PASS` |
 
 ---
 
@@ -181,3 +179,4 @@ Developed as part of an academic project at Dronacharya College of Engineering.
 ---
 
 <p align="center">Made with ❤️ by Lavanya Rana & Himanshu Yadav</p>
+
